@@ -1,21 +1,19 @@
 import { useState } from "react";
 
+import classNames from "classnames";
 import { Left, Right } from "neetoicons";
 import { Button } from "neetoui";
 
 const Carousel = ({ imageUrls, title }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handlePrevious = () => {
-    const previousIndex =
-      (currentIndex - 1 + imageUrls.length) % imageUrls.length;
-    setCurrentIndex(previousIndex);
-  };
+  const handleNext = () =>
+    setCurrentIndex(prevIndex => (prevIndex + 1) % imageUrls.length);
 
-  const handleNext = () => {
-    const nextIndex = (currentIndex + 1) % imageUrls.length;
-    setCurrentIndex(nextIndex);
-  };
+  const handlePrevious = () =>
+    setCurrentIndex(
+      prevIndex => (prevIndex - 1 + imageUrls.length) % imageUrls.length
+    );
 
   return (
     <div className="flex flex-col items-center">
@@ -39,23 +37,16 @@ const Carousel = ({ imageUrls, title }) => {
         />
       </div>
       <div className="flex space-x-1">
-        {imageUrls.map((_, index) => {
-          const defaultClasses =
-            "neeto-ui-border-black neeto-ui-rounded-full h-3 w-3 cursor-pointer border";
-
-          const dotClassNames =
-            index === currentIndex
-              ? defaultClasses.concat(" neeto-ui-bg-black")
-              : defaultClasses;
-
-          return (
-            <span
-              className={dotClassNames}
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-            />
-          );
-        })}
+        {imageUrls.map((_, index) => (
+          <span
+            key={index}
+            className={classNames(
+              "neeto-ui-border-black neeto-ui-rounded-full h-3 w-3 cursor-pointer border",
+              { "neeto-ui-bg-black": index === currentIndex }
+            )}
+            onClick={() => setCurrentIndex(index)}
+          />
+        ))}
       </div>
     </div>
   );
