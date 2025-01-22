@@ -35,8 +35,8 @@ const Carousel = ({ imageUrls, title }) => {
         <Button
           className="shrink-0 focus-within:ring-0 hover:bg-transparent"
           icon={Left}
-          onclick={handlePrevious}
           style="text"
+          onClick={handlePrevious}
         />
         <img
           alt={title}
