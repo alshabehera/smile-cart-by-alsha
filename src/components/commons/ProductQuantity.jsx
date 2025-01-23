@@ -3,12 +3,16 @@ import { useRef } from "react";
 import { TooltipWrapper } from "components/commons";
 import { VALID_COUNT_REGEX } from "components/constants";
 import useSelectedQuantity from "components/hooks/useSelectedQuantity";
+import { useShowProduct } from "hooks/reactQuery/useProductsApi";
 import { Toastr, Input, Button } from "neetoui";
 
-const ProductQuantity = ({ slug, availableQuantity }) => {
+const ProductQuantity = ({ slug }) => {
   const { selectedQuantity, setSelectedQuantity } = useSelectedQuantity(slug);
 
   const countInputFocus = useRef(null);
+  const { data: product = {} } = useShowProduct(slug);
+
+  const { availableQuantity } = product;
 
   const parsedSelectedQuantity = parseInt(selectedQuantity) || 0;
   const isNotValidQuantity = parsedSelectedQuantity >= availableQuantity;
