@@ -28,9 +28,9 @@ const ProductQuantity = ({ slug, availableQuantity }) => {
     }
   };
 
-  const preventNavigation = e => {
-    e.stopPropagation();
-    e.preventDefault();
+  const preventNavigation = event => {
+    event.stopPropagation();
+    event.preventDefault();
   };
 
   return (
@@ -39,8 +39,8 @@ const ProductQuantity = ({ slug, availableQuantity }) => {
         className="focus-within:ring-0"
         label="-"
         style="text"
-        onClick={e => {
-          preventNavigation(e);
+        onClick={event => {
+          preventNavigation(event);
           setSelectedQuantity(parsedSelectedQuantity - 1);
         }}
       />
@@ -63,8 +63,8 @@ const ProductQuantity = ({ slug, availableQuantity }) => {
           disabled={isNotValidQuantity}
           label="+"
           style="text"
-          onClick={e => {
-            preventNavigation(e);
+          onClick={event => {
+            preventNavigation(event);
             setSelectedQuantity(parsedSelectedQuantity + 1);
           }}
         />
